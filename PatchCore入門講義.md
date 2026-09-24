@@ -31,10 +31,10 @@ flowchart LR
 4. Step 2：メモリバンクの構築
 5. Step 3：Coreset サブサンプリング
 6. Step 4：推論（異常スコアと異常マップ）
-7. PyTorch による最小実装
-8. ライブラリ（anomalib）で動かす
-9. 性能・長所・短所
-10. まとめと演習問題
+7. ライブラリ（anomalib）で試す
+8. 性能・長所・短所
+9. まとめ
+10. 演習問題
 
 ---
 
@@ -177,7 +177,7 @@ layer3 出力      : (B, 1024,  14,  14)
 
 ※ 次元削減は必須ではありません。省略して1536次元のまま各パッチを保存する構成も可能です。この図と以下の数値は1024次元にする講義用の例です。
 
-ここでの「次元削減」は**1本のベクトルの長さ**を1536から1024にする処理です。**ベクトルの本数**784は変わりません。7章の講義用コードではチャネル方向の平均プーリングで簡略化しています。
+ここでの「次元削減」は**1本のベクトルの長さ**を1536から1024にする処理です。**ベクトルの本数**784は変わりません。
 
 **見方**：`28 × 28 = 784` はベクトルの**本数**。`1536 → 1024` は各ベクトルの**長さ**。位置合わせは `layer2` と `layer3` の同じ場所を結ぶために行う。
 
@@ -345,157 +345,7 @@ flowchart LR
 
 ---
 
-## 7. PyTorch による最小実装
-
-> 講義用に要点だけを抜き出した実装です（本番利用は後述の anomalib 推奨）。
-
-### 7.1 特徴抽出器
-
-```python
-import torch
-import torch.nn as nn
-import torch.nn.functional as F
-import torchvision
-from torchvision.transforms.functional import gaussian_blur
-
-
-class FeatureExtractor(nn.Module):
-    """ImageNet 事前学習済み WideResNet50 から layer2, layer3 を取り出す"""
-
-    def __init__(self):
-        super().__init__()
-        m = torchvision.models.wide_resnet50_2(weights="IMAGENET1K_V1")
-        self.stem = nn.Sequential(m.conv1, m.bn1, m.relu, m.maxpool)
-        self.layer1, self.layer2, self.layer3 = m.layer1, m.layer2, m.layer3
-        self.eval()
-        for p in self.parameters():
-            p.requires_grad = False  # 学習はしない！
-
-    @torch.no_grad()
-    def forward(self, x):
-        x = self.layer1(self.stem(x))
-        f2 = self.layer2(x)   # (B,  512, 28, 28)
-        f3 = self.layer3(f2)  # (B, 1024, 14, 14)
-        return f2, f3
-```
-
-### 7.2 パッチ特徴化（局所集約 + 結合 + 次元削減）
-
-```python
-def embed(f2, f3, patch_size=3, out_dim=1024):
-    # ① 局所集約: 3×3 近傍の平均
-    f2 = F.avg_pool2d(f2, patch_size, stride=1, padding=patch_size // 2)
-    f3 = F.avg_pool2d(f3, patch_size, stride=1, padding=patch_size // 2)
-
-    # ② layer3 を layer2 の解像度に合わせる
-    f3 = F.interpolate(f3, size=f2.shape[-2:], mode="bilinear", align_corners=False)
-
-    # ③ チャネル方向に結合 → (B, 1536, 28, 28)
-    feat = torch.cat([f2, f3], dim=1)
-    B, C, H, W = feat.shape
-
-    # (B, C, H, W) → (B*H*W, C): 1 行 = 1 パッチ
-    feat = feat.permute(0, 2, 3, 1).reshape(-1, C)
-
-    # ④ 次元削減 1536 → 1024（チャネル方向の平均プーリング）
-    feat = F.adaptive_avg_pool1d(feat.unsqueeze(1), out_dim).squeeze(1)
-    return feat, (H, W)
-```
-
-### 7.3 Greedy Coreset サブサンプリング
-
-```python
-def greedy_coreset(features, ratio=0.1, proj_dim=128, seed=0):
-    N, D = features.shape
-    n_select = max(1, int(N * ratio))
-    torch.manual_seed(seed)
-
-    # ランダム射影で距離計算を軽くする
-    proj = torch.randn(D, proj_dim, device=features.device) / proj_dim ** 0.5
-    z = features @ proj                                    # (N, proj_dim)
-
-    selected = [torch.randint(N, (1,)).item()]             # 最初の 1 点はランダム
-    min_dist = torch.cdist(z, z[selected]).squeeze(1)      # 各点 → 選択済み集合への最短距離
-
-    for _ in range(n_select - 1):
-        idx = torch.argmax(min_dist).item()                # 一番カバーされていない点
-        selected.append(idx)
-        new_dist = torch.cdist(z, z[idx : idx + 1]).squeeze(1)
-        min_dist = torch.minimum(min_dist, new_dist)       # 最短距離を更新
-
-    return features[selected]
-```
-
-### 7.4 学習（= メモリバンク構築）
-
-```python
-@torch.no_grad()
-def fit(extractor, train_loader, device, ratio=0.1):
-    feats = []
-    for x, *_ in train_loader:                 # 正常画像のみ
-        f2, f3 = extractor(x.to(device))
-        feat, _ = embed(f2, f3)
-        feats.append(feat)
-    memory_bank = torch.cat(feats)             # (N画像 × 784, 1024)
-    return greedy_coreset(memory_bank, ratio)  # (約 10%, 1024)
-```
-
-### 7.5 推論（異常マップ + 画像スコア）
-
-```python
-@torch.no_grad()
-def predict(extractor, memory, x, num_neighbors=9, sigma=4):
-    B = x.shape[0]
-    f2, f3 = extractor(x)
-    feat, (H, W) = embed(f2, f3)                        # (B*H*W, D)
-
-    # --- パッチごとの最近傍距離 ---
-    dist = torch.cdist(feat, memory)                    # (B*H*W, |M|)
-    patch_score, nn_idx = dist.min(dim=1)
-    patch_score = patch_score.view(B, H * W)
-    nn_idx = nn_idx.view(B, H * W)
-    feat = feat.view(B, H * W, -1)
-
-    # --- 画像スコア（最も異常なパッチ + 再重み付け） ---
-    s_star, loc = patch_score.max(dim=1)                # (B,)
-    m_test_star = feat[torch.arange(B), loc]            # (B, D)
-    m_star = memory[nn_idx[torch.arange(B), loc]]       # (B, D)
-
-    # m* のメモリ内近傍 b 個（m* 自身を含む）
-    _, nb_idx = torch.cdist(m_star, memory).topk(num_neighbors, largest=False)
-    nb_dist = torch.cdist(m_test_star.unsqueeze(1), memory[nb_idx]).squeeze(1)  # (B, b)
-    weight = 1 - F.softmax(nb_dist, dim=1)[:, 0]        # 式 (6.2) の括弧部分
-    image_score = weight * s_star
-
-    # --- 異常マップ ---
-    amap = patch_score.view(B, 1, H, W)
-    amap = F.interpolate(amap, size=x.shape[-2:], mode="bilinear", align_corners=False)
-    ksize = 2 * int(4 * sigma + 0.5) + 1
-    amap = gaussian_blur(amap, kernel_size=ksize, sigma=sigma)
-
-    return image_score, amap.squeeze(1)
-```
-
-> 💡 `softmax(d)[0] = exp(d_0) / Σ exp(d_j)` なので、6.2 節の再重み付け式をそのまま書いたものになっています。
-
-### 7.6 使い方のイメージ
-
-```python
-device = "cuda" if torch.cuda.is_available() else "cpu"
-extractor = FeatureExtractor().to(device)
-
-memory = fit(extractor, train_loader, device, ratio=0.1)
-
-for x, label, mask in test_loader:
-    score, amap = predict(extractor, memory, x.to(device))
-    # score > 閾値 なら異常、amap を画像に重ねて可視化
-```
-
-前処理は ImageNet と同じ正規化（256 にリサイズ → 224 にセンタークロップ → mean/std 正規化）を使います。
-
----
-
-## 8. ライブラリ（anomalib）で動かす
+## 7. ライブラリ（anomalib）で試す
 
 実務では Intel の OSS [anomalib](https://github.com/open-edge-platform/anomalib) を使うのが手軽です。
 
@@ -521,9 +371,9 @@ engine.test(model=model, datamodule=datamodule)  # AUROC 等を算出
 
 ---
 
-## 9. 性能・長所・短所
+## 8. 性能・長所・短所
 
-### 9.1 MVTec AD での結果（論文報告値）
+### 8.1 MVTec AD での結果（論文報告値）
 
 | 手法 | 画像 AUROC | ピクセル AUROC |
 |---|---|---|
@@ -533,7 +383,7 @@ engine.test(model=model, datamodule=datamodule)  # AUROC 等を算出
 
 ※ 数値は論文掲載値。実験条件により多少変動します。
 
-### 9.2 長所と短所
+### 8.2 長所と短所
 
 | 👍 長所 | 👎 短所 |
 |---|---|
@@ -553,7 +403,7 @@ engine.test(model=model, datamodule=datamodule)  # AUROC 等を算出
 
 PatchCore は各場所を主に局所的な見た目で照合する。欠けた位置の背景が別の正常位置の背景に似ていれば、距離が小さくなり、欠落に気づきにくい。部品の数や配置を確認する仕組みを追加すると補える。
 
-### 9.3 精度・速度のチューニングポイント
+### 8.3 精度・速度のチューニングポイント
 
 - `coreset_sampling_ratio`：小さくすると高速・省メモリ、大きすぎても効果は頭打ち
 - `layers`：layer2+layer3 が標準。layer1 を加えると細かい傷に敏感になることも
@@ -562,7 +412,7 @@ PatchCore は各場所を主に局所的な見た目で照合する。欠けた�
 
 ---
 
-## 10. まとめ
+## 9. まとめ
 
 ```mermaid
 mindmap
@@ -587,13 +437,13 @@ mindmap
 
 ---
 
-## 演習問題
+## 10. 演習問題
 
 1. **(基礎)** layer4 の特徴を使わない理由を 2 つ挙げよ。
 2. **(基礎)** 入力が 224×224、正常画像が 300 枚、Coreset 比率 1% のとき、メモリバンクのパッチ数はいくつか。
 3. **(考察)** ランダムサブサンプリングと Coreset サブサンプリングで、異常検知性能に差が出るのはなぜか。
-4. **(考察)** 再重み付けがないと、どのような誤検知が起きやすいか。
-5. **(実装)** 7 章のコードで `ratio` を 0.01 / 0.1 / 0.25 と変え、推論時間と AUROC の変化を比較せよ。
+4. **(基礎)** 画像スコアと異常マップは、それぞれ何を答えるか。
+5. **(考察)** Coreset 比率を 1% から 10% に増やすと、メモリ量・探索時間・正常パターンのカバー範囲はどう変わるか。
 6. **(発展)** 「ネジが 1 本欠けている」ような異常を PatchCore が苦手とする理由を説明し、改善策を考えよ。
 
 <details>
@@ -602,8 +452,8 @@ mindmap
 1. ① ImageNet 分類タスクに特化しすぎており汎用的なテクスチャ情報が失われる ② 空間解像度が低く（7×7）、異常位置の特定が粗くなる
 2. 300 × 784 × 0.01 = **2,352** 個
 3. ランダムでは出現頻度の低い正常パターンが抜け落ち、それに該当するテストパッチが「最近傍が遠い＝異常」と誤判定される。Coreset は特徴空間を均等にカバーするため、まれなパターンも残る。
-4. メモリ内で孤立した（まれな）正常パターンに近いテストパッチが、距離がやや大きいだけで異常と判定される偽陽性。
-5. （実験結果による。一般に 1% でも AUROC の低下は小さく、推論は大幅に速くなる）
+4. 画像スコアは『この画像全体が異常か』を1つの数値で示す。異常マップは各位置の距離を並べ、『どこが怪しいか』を示す。
+5. 保存する代表点は約10倍になり、メモリ量と最近傍探索の負担は増える。一方、まれな正常パターンまで残せる可能性が高まる。精度の改善幅はデータによる。
 6. 各パッチは局所的には正常な見た目のため、どのパッチもメモリ内に近い点が存在する。対策例：大域特徴の併用、個数・配置関係をモデル化する手法（論理的異常向けの手法）との組み合わせ など。
 
 </details>
@@ -617,17 +467,3 @@ mindmap
 - N. Cohen, Y. Hoshen, *"Sub-Image Anomaly Detection with Deep Pyramid Correspondences"* (SPADE), 2020.
 - P. Bergmann et al., *"MVTec AD — A Comprehensive Real-World Dataset for Unsupervised Anomaly Detection"*, CVPR 2019.
 - 公式実装: https://github.com/amazon-science/patchcore-inspection
-
-
-
-
-
-
-
-
-
-
-
-
-
-
