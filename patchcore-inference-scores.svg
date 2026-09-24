@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+<title id="title">最近傍距離から画像スコアと異常マップへ</title>
+<desc id="desc">検査パッチqと正常メモリA、B、Cの距離0.8、0.2、1.4から最短距離0.2を選ぶ。別のパッチrは2.7。各位置の距離を3×3に戻し、最大距離から画像スコア、全距離から異常マップを作る。</desc>
+<defs><style>
+text{font-family:'Yu Gothic','Meiryo',sans-serif;fill:#172233}.title{font-size:38px;font-weight:700}.head{font-size:26px;font-weight:700}.body{font-size:21px}.small{font-size:18px}.em{font-size:23px;font-weight:700}.num{font-size:27px;font-weight:700}.panel{fill:#fff;stroke:#172233;stroke-width:2.5}.soft{fill:#f5f6f8;stroke:#172233;stroke-width:2}.hot{fill:#fff0e5;stroke:#ed7d31;stroke-width:2.5}.arrow{stroke:#172233;stroke-width:2.5;fill:none;marker-end:url(#a)}.branch{stroke:#172233;stroke-width:2.5;fill:none}
+</style><marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#172233"/></marker></defs>
+<rect width="1600" height="900" fill="#fff"/>
+<text x="65" y="86" class="title">最近傍距離を、異常スコアと異常マップにする</text>
+<text x="65" y="128" class="body">各パッチで「最も似た正常特徴までの距離」を求め、元の位置に戻す</text>
+
+<text x="278" y="215" text-anchor="middle" class="head">① 正常メモリと比較</text>
+<rect x="65" y="245" width="425" height="395" rx="8" class="panel"/>
+<text x="100" y="291" class="body">検査パッチ q からの距離</text>
+<text x="125" y="343" class="body">正常 A</text><text x="385" y="343" text-anchor="end" class="num">0.8</text>
+<rect x="93" y="366" width="365" height="63" rx="6" class="hot"/>
+<text x="125" y="407" class="body">正常 B</text><text x="385" y="407" text-anchor="end" class="num">0.2</text>
+<text x="125" y="471" class="body">正常 C</text><text x="385" y="471" text-anchor="end" class="num">1.4</text>
+<path d="M95 501 H457" stroke="#d7dde4" stroke-width="2"/>
+<text x="100" y="544" class="em">q の最短距離 = 0.2</text>
+<text x="100" y="592" class="body">別のパッチ r = 2.7</text>
+<text x="278" y="684" text-anchor="middle" class="small">距離が大きいほど異常らしい</text>
+
+<path d="M500 443 H570" class="arrow"/>
+<text x="790" y="215" text-anchor="middle" class="head">② 元の位置に戻す</text>
+<rect x="580" y="245" width="425" height="395" rx="8" class="panel"/>
+<text x="792" y="286" text-anchor="middle" class="body">距離の例（3×3）</text>
+<g class="num" text-anchor="middle">
+<rect x="670" y="318" width="80" height="80" class="soft"/><text x="710" y="369">0.2</text>
+<rect x="750" y="318" width="80" height="80" class="soft"/><text x="790" y="369">0.1</text>
+<rect x="830" y="318" width="80" height="80" class="soft"/><text x="870" y="369">0.2</text>
+<rect x="670" y="398" width="80" height="80" class="soft"/><text x="710" y="449">0.2</text>
+<rect x="750" y="398" width="80" height="80" class="hot"/><text x="790" y="449">2.7</text>
+<rect x="830" y="398" width="80" height="80" class="hot"/><text x="870" y="449">2.3</text>
+<rect x="670" y="478" width="80" height="80" class="soft"/><text x="710" y="529">0.1</text>
+<rect x="750" y="478" width="80" height="80" class="soft"/><text x="790" y="529">0.3</text>
+<rect x="830" y="478" width="80" height="80" class="soft"/><text x="870" y="529">0.2</text>
+</g>
+<text x="792" y="601" text-anchor="middle" class="body">高い場所は中央と右中</text>
+<text x="792" y="684" text-anchor="middle" class="small">実際は28×28 = 784位置</text>
+
+<path d="M1015 443 H1058 V345 H1100" class="arrow"/>
+<path d="M1058 443 V550 H1100" class="branch"/>
+<path d="M1058 550 H1100" class="arrow"/>
+<text x="1320" y="215" text-anchor="middle" class="head">③ 2種類の出力</text>
+<rect x="1110" y="260" width="425" height="165" rx="8" class="panel"/>
+<text x="1145" y="308" class="head">画像スコア</text>
+<text x="1145" y="354" class="body">最大距離 2.7 を出発点に</text>
+<text x="1145" y="389" class="body">再重み付け → 画像全体の判定</text>
+<rect x="1110" y="465" width="425" height="165" rx="8" class="panel"/>
+<text x="1145" y="513" class="head">異常マップ</text>
+<text x="1145" y="559" class="body">全位置の距離を残す</text>
+<text x="1145" y="594" class="body">→ 怪しい場所を示す</text>
+
+<path d="M65 748 H1535" stroke="#d7dde4" stroke-width="2"/>
+<text x="800" y="801" text-anchor="middle" class="em">画像スコアは「この画像は異常か」　異常マップは「どこが異常か」</text>
+<text x="800" y="847" text-anchor="middle" class="small">※ 数値は説明用。実際は784位置の距離を並べ、異常マップは補間・平滑化する。</text>
+</svg>

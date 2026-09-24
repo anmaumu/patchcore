@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="790" viewBox="0 0 1600 790" role="img" aria-labelledby="title desc">
+<title id="title">画像全体ではなく場所ごとに照合する</title>
+<desc id="desc">4×4の正常画像と検査画像を示し、検査画像の2つの傷の位置に対応する異常マップの2位置が高くなる例。実際には各パッチ特徴を正常メモリバンクと比べる。</desc>
+<defs><style>text{font-family:'Yu Gothic','Meiryo',sans-serif;fill:#172233}.title{font-size:38px;font-weight:700}.head{font-size:28px;font-weight:700}.body{font-size:22px}.small{font-size:18px}.em{font-size:24px;font-weight:700}.arrow{stroke:#172233;stroke-width:3;fill:none;marker-end:url(#a)}.cell{stroke:#172233;stroke-width:2}</style><marker id="a" markerWidth="11" markerHeight="11" refX="9" refY="5.5" orient="auto"><path d="M0 0 L11 5.5 L0 11 Z" fill="#172233"/></marker></defs>
+<rect width="1600" height="790" fill="#fff"/>
+<text x="70" y="85" class="title">異常は画像全体ではなく、場所ごとに見つける</text>
+<text x="70" y="130" class="body">各位置のパッチ特徴を正常の特徴と比べ、距離を元の位置へ戻す</text>
+<text x="235" y="230" text-anchor="middle" class="head">正常画像の見た目</text>
+<text x="690" y="230" text-anchor="middle" class="head">検査画像の見た目</text>
+<text x="1365" y="230" text-anchor="middle" class="head">異常マップ</text>
+
+<rect x="90" y="265" width="72" height="72" fill="#dfeaf1" class="cell"/>
+<rect x="162" y="265" width="72" height="72" fill="#dfeaf1" class="cell"/>
+<rect x="234" y="265" width="72" height="72" fill="#dfeaf1" class="cell"/>
+<rect x="306" y="265" width="72" height="72" fill="#dfeaf1" class="cell"/>
+<rect x="90" y="337" width="72" height="72" fill="#dfeaf1" class="cell"/>
+<rect x="162" y="337" width="72" height="72" fill="#dfeaf1" class="cell"/>
+<rect x="234" y="337" width="72" height="72" fill="#dfeaf1" class="cell"/>
+<rect x="306" y="337" width="72" height="72" fill="#dfeaf1" class="cell"/>
+<rect x="90" y="409" width="72" height="72" fill="#dfeaf1" class="cell"/>
+<rect x="162" y="409" width="72" height="72" fill="#dfeaf1" class="cell"/>
+<rect x="234" y="409" width="72" height="72" fill="#dfeaf1" class="cell"/>
+<rect x="306" y="409" width="72" height="72" fill="#dfeaf1" class="cell"/>
+<rect x="90" y="481" width="72" height="72" fill="#dfeaf1" class="cell"/>
+<rect x="162" y="481" width="72" height="72" fill="#dfeaf1" class="cell"/>
+<rect x="234" y="481" width="72" height="72" fill="#dfeaf1" class="cell"/>
+<rect x="306" y="481" width="72" height="72" fill="#dfeaf1" class="cell"/>
+<rect x="545" y="265" width="72" height="72" fill="#dfeaf1" class="cell"/>
+<rect x="617" y="265" width="72" height="72" fill="#dfeaf1" class="cell"/>
+<rect x="689" y="265" width="72" height="72" fill="#dfeaf1" class="cell"/>
+<rect x="761" y="265" width="72" height="72" fill="#dfeaf1" class="cell"/>
+<rect x="545" y="337" width="72" height="72" fill="#dfeaf1" class="cell"/>
+<rect x="617" y="337" width="72" height="72" fill="#ed7d31" class="cell"/>
+<rect x="689" y="337" width="72" height="72" fill="#ed7d31" class="cell"/>
+<rect x="761" y="337" width="72" height="72" fill="#dfeaf1" class="cell"/>
+<rect x="545" y="409" width="72" height="72" fill="#dfeaf1" class="cell"/>
+<rect x="617" y="409" width="72" height="72" fill="#dfeaf1" class="cell"/>
+<rect x="689" y="409" width="72" height="72" fill="#dfeaf1" class="cell"/>
+<rect x="761" y="409" width="72" height="72" fill="#dfeaf1" class="cell"/>
+<rect x="545" y="481" width="72" height="72" fill="#dfeaf1" class="cell"/>
+<rect x="617" y="481" width="72" height="72" fill="#dfeaf1" class="cell"/>
+<rect x="689" y="481" width="72" height="72" fill="#dfeaf1" class="cell"/>
+<rect x="761" y="481" width="72" height="72" fill="#dfeaf1" class="cell"/>
+<rect x="1220" y="265" width="72" height="72" fill="#fff" class="cell"/>
+<rect x="1292" y="265" width="72" height="72" fill="#fff" class="cell"/>
+<rect x="1364" y="265" width="72" height="72" fill="#fff" class="cell"/>
+<rect x="1436" y="265" width="72" height="72" fill="#fff" class="cell"/>
+<rect x="1220" y="337" width="72" height="72" fill="#fff" class="cell"/>
+<rect x="1292" y="337" width="72" height="72" fill="#d84b45" class="cell"/>
+<rect x="1364" y="337" width="72" height="72" fill="#d84b45" class="cell"/>
+<rect x="1436" y="337" width="72" height="72" fill="#fff" class="cell"/>
+<rect x="1220" y="409" width="72" height="72" fill="#fff" class="cell"/>
+<rect x="1292" y="409" width="72" height="72" fill="#fff" class="cell"/>
+<rect x="1364" y="409" width="72" height="72" fill="#fff" class="cell"/>
+<rect x="1436" y="409" width="72" height="72" fill="#fff" class="cell"/>
+<rect x="1220" y="481" width="72" height="72" fill="#fff" class="cell"/>
+<rect x="1292" y="481" width="72" height="72" fill="#fff" class="cell"/>
+<rect x="1364" y="481" width="72" height="72" fill="#fff" class="cell"/>
+<rect x="1436" y="481" width="72" height="72" fill="#fff" class="cell"/>
+<text x="463" y="431" text-anchor="middle" class="head">＋</text>
+<path d="M850 409 H950" class="arrow"/>
+<rect x="965" y="355" width="225" height="107" rx="8" fill="#f4f6f8" stroke="#172233" stroke-width="2.5"/>
+<text x="1078" y="397" text-anchor="middle" class="body">各位置の特徴を</text>
+<text x="1078" y="434" text-anchor="middle" class="body">正常特徴と照合</text>
+<path d="M1192 409 H1207" class="arrow"/>
+
+<text x="235" y="600" text-anchor="middle" class="body">すべて正常</text>
+<text x="690" y="600" text-anchor="middle" class="body">オレンジの2か所に傷</text>
+<text x="1365" y="600" text-anchor="middle" class="body">同じ2か所の距離が大きい</text>
+<path d="M70 648 H1530" stroke="#d7dde4" stroke-width="2"/>
+<text x="800" y="698" text-anchor="middle" class="em">場所ごとの距離を並べると、異常の位置が見える</text>
+<text x="800" y="744" text-anchor="middle" class="small">※ 4×4は説明用。実際は正常画像のパッチ特徴を集めたメモリバンクと比較し、例では28×28位置を使う。</text>
+</svg>

@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="900" viewBox="0 0 1800 900" role="img" aria-labelledby="title desc">
+<title id="title">CNNは各位置から高次元のパッチ特徴を抽出する</title>
+<desc id="desc">入力画像をCNNに通すと多数のチャネルを持つ特徴マップが得られ、同じ空間位置のチャネル値を1本にまとめると高次元のパッチ特徴ベクトルになる。講義例では1536次元、位置は28×28で784本。</desc>
+<defs><style>text{font-family:'Yu Gothic','Meiryo',sans-serif;fill:#172233}.title{font-size:39px;font-weight:700}.head{font-size:27px;font-weight:700}.body{font-size:21px}.small{font-size:18px}.em{font-size:24px;font-weight:700}.box{fill:#fff;stroke:#172233;stroke-width:2.5}.soft{fill:#f4f6f8;stroke:#172233;stroke-width:2.5}.cell{fill:#fff;stroke:#172233;stroke-width:1.7}.selected{fill:#ed7d31;stroke:#172233;stroke-width:1.7}.arrow{stroke:#172233;stroke-width:2.7;fill:none;marker-end:url(#a)}</style><marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#172233"/></marker></defs>
+<rect width="1800" height="900" fill="#fff"/>
+<text x="70" y="88" class="title">CNNは各位置から高次元の特徴を抽出する</text>
+<text x="70" y="132" class="body">1か所の見た目を、たくさんの数値を並べた1本のベクトルで表す</text>
+<text x="228" y="230" text-anchor="middle" class="head">入力画像</text>
+<text x="978" y="230" text-anchor="middle" class="head">多チャネルの特徴マップ</text>
+<text x="1550" y="230" text-anchor="middle" class="head">パッチ特徴量</text>
+
+<rect x="90" y="315" width="55" height="55" class="cell"/>
+<rect x="145" y="315" width="55" height="55" class="cell"/>
+<rect x="200" y="315" width="55" height="55" class="cell"/>
+<rect x="255" y="315" width="55" height="55" class="cell"/>
+<rect x="310" y="315" width="55" height="55" class="cell"/>
+<rect x="90" y="370" width="55" height="55" class="cell"/>
+<rect x="145" y="370" width="55" height="55" class="cell"/>
+<rect x="200" y="370" width="55" height="55" class="cell"/>
+<rect x="255" y="370" width="55" height="55" class="cell"/>
+<rect x="310" y="370" width="55" height="55" class="cell"/>
+<rect x="90" y="425" width="55" height="55" class="cell"/>
+<rect x="145" y="425" width="55" height="55" class="cell"/>
+<rect x="200" y="425" width="55" height="55" class="selected"/>
+<rect x="255" y="425" width="55" height="55" class="cell"/>
+<rect x="310" y="425" width="55" height="55" class="cell"/>
+<rect x="90" y="480" width="55" height="55" class="cell"/>
+<rect x="145" y="480" width="55" height="55" class="cell"/>
+<rect x="200" y="480" width="55" height="55" class="cell"/>
+<rect x="255" y="480" width="55" height="55" class="cell"/>
+<rect x="310" y="480" width="55" height="55" class="cell"/>
+<rect x="90" y="535" width="55" height="55" class="cell"/>
+<rect x="145" y="535" width="55" height="55" class="cell"/>
+<rect x="200" y="535" width="55" height="55" class="cell"/>
+<rect x="255" y="535" width="55" height="55" class="cell"/>
+<rect x="310" y="535" width="55" height="55" class="cell"/>
+<text x="228" y="633" text-anchor="middle" class="body">注目する1か所</text>
+<path d="M385 452 H450" class="arrow"/>
+<rect x="465" y="385" width="170" height="135" rx="8" class="soft"/>
+<text x="550" y="443" text-anchor="middle" class="head">CNN</text>
+<text x="550" y="483" text-anchor="middle" class="small">中間層を使う</text>
+<path d="M650 452 H700" class="arrow"/>
+
+<rect x="715" y="355" width="36" height="36" class="cell"/>
+<rect x="751" y="355" width="36" height="36" class="cell"/>
+<rect x="787" y="355" width="36" height="36" class="cell"/>
+<rect x="823" y="355" width="36" height="36" class="cell"/>
+<rect x="715" y="391" width="36" height="36" class="cell"/>
+<rect x="751" y="391" width="36" height="36" class="cell"/>
+<rect x="787" y="391" width="36" height="36" class="selected"/>
+<rect x="823" y="391" width="36" height="36" class="cell"/>
+<rect x="715" y="427" width="36" height="36" class="cell"/>
+<rect x="751" y="427" width="36" height="36" class="cell"/>
+<rect x="787" y="427" width="36" height="36" class="cell"/>
+<rect x="823" y="427" width="36" height="36" class="cell"/>
+<rect x="715" y="463" width="36" height="36" class="cell"/>
+<rect x="751" y="463" width="36" height="36" class="cell"/>
+<rect x="787" y="463" width="36" height="36" class="cell"/>
+<rect x="823" y="463" width="36" height="36" class="cell"/>
+<text x="787" y="535" text-anchor="middle" class="small">チャネル 1</text>
+<rect x="885" y="355" width="36" height="36" class="cell"/>
+<rect x="921" y="355" width="36" height="36" class="cell"/>
+<rect x="957" y="355" width="36" height="36" class="cell"/>
+<rect x="993" y="355" width="36" height="36" class="cell"/>
+<rect x="885" y="391" width="36" height="36" class="cell"/>
+<rect x="921" y="391" width="36" height="36" class="cell"/>
+<rect x="957" y="391" width="36" height="36" class="selected"/>
+<rect x="993" y="391" width="36" height="36" class="cell"/>
+<rect x="885" y="427" width="36" height="36" class="cell"/>
+<rect x="921" y="427" width="36" height="36" class="cell"/>
+<rect x="957" y="427" width="36" height="36" class="cell"/>
+<rect x="993" y="427" width="36" height="36" class="cell"/>
+<rect x="885" y="463" width="36" height="36" class="cell"/>
+<rect x="921" y="463" width="36" height="36" class="cell"/>
+<rect x="957" y="463" width="36" height="36" class="cell"/>
+<rect x="993" y="463" width="36" height="36" class="cell"/>
+<text x="957" y="535" text-anchor="middle" class="small">チャネル 2</text>
+<rect x="1055" y="355" width="36" height="36" class="cell"/>
+<rect x="1091" y="355" width="36" height="36" class="cell"/>
+<rect x="1127" y="355" width="36" height="36" class="cell"/>
+<rect x="1163" y="355" width="36" height="36" class="cell"/>
+<rect x="1055" y="391" width="36" height="36" class="cell"/>
+<rect x="1091" y="391" width="36" height="36" class="cell"/>
+<rect x="1127" y="391" width="36" height="36" class="selected"/>
+<rect x="1163" y="391" width="36" height="36" class="cell"/>
+<rect x="1055" y="427" width="36" height="36" class="cell"/>
+<rect x="1091" y="427" width="36" height="36" class="cell"/>
+<rect x="1127" y="427" width="36" height="36" class="cell"/>
+<rect x="1163" y="427" width="36" height="36" class="cell"/>
+<rect x="1055" y="463" width="36" height="36" class="cell"/>
+<rect x="1091" y="463" width="36" height="36" class="cell"/>
+<rect x="1127" y="463" width="36" height="36" class="cell"/>
+<rect x="1163" y="463" width="36" height="36" class="cell"/>
+<text x="1127" y="535" text-anchor="middle" class="small">チャネル …</text>
+<text x="980" y="590" text-anchor="middle" class="body">同じ位置に、チャネルごとの値がある</text>
+<text x="980" y="630" text-anchor="middle" class="small">図の3枚は模式図。実際には多数のチャネル。</text>
+<path d="M1220 452 H1290" class="arrow"/>
+<rect x="1305" y="320" width="445" height="300" rx="9" class="box"/>
+<text x="1528" y="368" text-anchor="middle" class="body">同じ位置の値を1列にまとめる</text>
+<rect x="1370" y="397" width="318" height="44" fill="#fff1e8" stroke="#ed7d31" stroke-width="2"/>
+<text x="1529" y="427" text-anchor="middle" class="body">layer2：512個の値</text>
+<text x="1529" y="475" text-anchor="middle" class="head">＋</text>
+<rect x="1370" y="499" width="318" height="44" fill="#fff1e8" stroke="#ed7d31" stroke-width="2"/>
+<text x="1529" y="529" text-anchor="middle" class="body">layer3：1024個の値</text>
+<text x="1528" y="585" text-anchor="middle" class="em">= 1536次元のベクトル</text>
+<path d="M70 704 H1730" stroke="#d7dde4" stroke-width="2"/>
+<text x="900" y="759" text-anchor="middle" class="em">28×28の各位置に1本ずつ → 1画像あたり784本</text>
+<text x="900" y="812" text-anchor="middle" class="small">※ 数値はこの講義の構成例。layer3の位置を合わせて結合し、必要に応じて次元を調整する。</text>
+<text x="900" y="847" text-anchor="middle" class="small">図のグリッドは説明用で、実際の特徴マップの大きさとは異なる。</text>
+</svg>

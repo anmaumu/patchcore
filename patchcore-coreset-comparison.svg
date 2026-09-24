@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="850" viewBox="0 0 1600 850" role="img" aria-labelledby="title desc">
+<title id="title">ランダム抽出とCoreset抽出の比較</title>
+<desc id="desc">元のメモリバンクには密集した正常特徴と、離れたまれな正常特徴がある。ランダム抽出ではまれな点が選ばれない例、Coresetでは全体を覆うように選ばれて残る例を示す。</desc>
+<defs><style>text{font-family:'Yu Gothic','Meiryo',sans-serif;fill:#172233}.title{font-size:39px;font-weight:700}.head{font-size:27px;font-weight:700}.body{font-size:21px}.small{font-size:18px}.call{font-size:23px;font-weight:700}.panel{fill:#fff;stroke:#172233;stroke-width:2.5}.arrow{stroke:#172233;stroke-width:2.5;fill:none;marker-end:url(#a)}</style><marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#172233"/></marker></defs>
+<rect width="1600" height="850" fill="#fff"/>
+<text x="70" y="90" class="title">Coresetは「まれな正常」も残しやすい</text>
+<text x="70" y="135" class="body">特徴空間から少数の代表を選ぶときの違い</text>
+<text x="285" y="218" text-anchor="middle" class="head">元のメモリバンク</text>
+<text x="800" y="218" text-anchor="middle" class="head">ランダム抽出</text>
+<text x="1315" y="218" text-anchor="middle" class="head">Coreset抽出</text>
+<rect x="65" y="250" width="440" height="340" rx="8" class="panel"/>
+<rect x="580" y="250" width="440" height="340" rx="8" class="panel"/>
+<rect x="1095" y="250" width="440" height="340" rx="8" class="panel"/>
+<path d="M516 420 H565" class="arrow"/><path d="M1031 420 H1080" class="arrow"/>
+
+<circle cx="151" cy="334" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="179" cy="339" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="207" cy="344" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="235" cy="334" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="263" cy="339" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="291" cy="344" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="319" cy="334" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="347" cy="339" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="161" cy="376" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="189" cy="381" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="217" cy="386" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="245" cy="376" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="273" cy="381" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="301" cy="386" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="329" cy="376" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="357" cy="381" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="151" cy="418" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="179" cy="423" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="207" cy="428" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="235" cy="418" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="263" cy="423" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="291" cy="428" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="319" cy="418" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="347" cy="423" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="161" cy="460" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="189" cy="465" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="217" cy="470" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="245" cy="460" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="273" cy="465" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="301" cy="470" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="329" cy="460" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="357" cy="465" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="151" cy="502" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="179" cy="507" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="207" cy="512" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="235" cy="502" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="263" cy="507" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="291" cy="512" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="319" cy="502" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="418" cy="416" r="10" fill="#ed7d31" stroke="#172233" stroke-width="2"/>
+<circle cx="732" cy="386" r="10" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="788" cy="381" r="10" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="750" cy="418" r="10" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="788" cy="465" r="10" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="933" cy="416" r="14" fill="none" stroke="#ed7d31" stroke-width="2" stroke-dasharray="5 5"/>
+<path d="M926 409 l14 14 m0 -14 l-14 14" stroke="#ed7d31" stroke-width="2"/>
+<circle cx="1181" cy="334" r="10" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="1377" cy="339" r="10" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="1181" cy="502" r="10" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="1448" cy="416" r="10" fill="#ed7d31" stroke="#172233" stroke-width="2"/>
+<text x="285" y="640" text-anchor="middle" class="body">オレンジも正常な特徴</text>
+<text x="800" y="640" text-anchor="middle" class="call">離れた正常例が抜けることがある</text>
+<text x="1315" y="640" text-anchor="middle" class="call">離れた正常例も代表に選ぶ</text>
+<path d="M65 710 H1535" stroke="#d7dde4" stroke-width="2"/>
+<text x="800" y="765" text-anchor="middle" class="body">狙い：少ない点で、正常特徴の広がりを覆う</text>
+<text x="800" y="808" text-anchor="middle" class="small">※ 点の配置と抽出数は説明用。Coresetは距離に基づいて代表点を選ぶ。</text>
+</svg>

@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="850" viewBox="0 0 1600 850" role="img" aria-labelledby="title desc">
+<title id="title">局所集約：3×3の近傍を平均しても位置数は変わらない</title>
+<desc id="desc">5×5の模式的な特徴マップで中央3×3の近傍を色付けし、9位置の特徴の平均が出力マップの中央1位置に反映されることを示す。実際の28×28の位置数は処理前後で同じ。</desc>
+<defs><style>
+text{font-family:'Yu Gothic','Meiryo',sans-serif;fill:#172233}
+.title{font-size:39px;font-weight:700}.head{font-size:27px;font-weight:700}.body{font-size:22px}.small{font-size:19px}.em{font-size:25px;font-weight:700}
+.outline{fill:#fff;stroke:#172233;stroke-width:3}.cell{fill:#fff;stroke:#172233;stroke-width:2}.neighbor{fill:#fff0e5;stroke:#172233;stroke-width:2}.center{fill:#ed7d31;stroke:#172233;stroke-width:2}.outcenter{fill:#ed7d31;stroke:#172233;stroke-width:2}.arrow{stroke:#172233;stroke-width:3;fill:none;marker-end:url(#a)}
+</style><marker id="a" markerWidth="11" markerHeight="11" refX="9" refY="5.5" orient="auto"><path d="M0 0 L11 5.5 L0 11 Z" fill="#172233"/></marker></defs>
+<rect width="1600" height="850" fill="#fff"/>
+<text x="80" y="91" class="title">局所集約：周りの情報を1か所の特徴に加える</text>
+<text x="80" y="137" class="body">中央の位置と周囲8位置を平均する例（3×3平均）</text>
+
+<text x="288" y="225" text-anchor="middle" class="head">処理前の特徴マップ</text>
+<text x="1285" y="225" text-anchor="middle" class="head">処理後の特徴マップ</text>
+
+<g id="input-grid">
+<path d="M125 260 H450 V585 H125 Z M190 260 V585 M255 260 V585 M320 260 V585 M385 260 V585 M125 325 H450 M125 390 H450 M125 455 H450 M125 520 H450" class="outline"/>
+<rect x="190" y="325" width="65" height="65" class="neighbor"/><rect x="255" y="325" width="65" height="65" class="neighbor"/><rect x="320" y="325" width="65" height="65" class="neighbor"/>
+<rect x="190" y="390" width="65" height="65" class="neighbor"/><rect x="255" y="390" width="65" height="65" class="center"/><rect x="320" y="390" width="65" height="65" class="neighbor"/>
+<rect x="190" y="455" width="65" height="65" class="neighbor"/><rect x="255" y="455" width="65" height="65" class="neighbor"/><rect x="320" y="455" width="65" height="65" class="neighbor"/>
+</g>
+<text x="288" y="628" text-anchor="middle" class="body">オレンジ：中心位置</text>
+<text x="288" y="662" text-anchor="middle" class="body">薄い色：周囲8位置</text>
+
+<path d="M470 423 H585" class="arrow"/>
+<rect x="600" y="333" width="400" height="180" rx="10" fill="#f5f6f8" stroke="#172233" stroke-width="3"/>
+<text x="800" y="393" text-anchor="middle" class="head">3×3 の平均</text>
+<text x="800" y="437" text-anchor="middle" class="body">9位置の特徴を平均</text>
+<text x="800" y="476" text-anchor="middle" class="small">各位置で同じ処理を繰り返す</text>
+<path d="M1015 423 H1110" class="arrow"/>
+
+<g id="output-grid">
+<path d="M1125 260 H1450 V585 H1125 Z M1190 260 V585 M1255 260 V585 M1320 260 V585 M1385 260 V585 M1125 325 H1450 M1125 390 H1450 M1125 455 H1450 M1125 520 H1450" class="outline"/>
+<rect x="1255" y="390" width="65" height="65" class="outcenter"/>
+</g>
+<text x="1288" y="628" text-anchor="middle" class="body">中央の値に周辺情報が入る</text>
+<text x="1288" y="662" text-anchor="middle" class="body">ほかの位置も同様に更新</text>
+
+<path d="M80 710 H1520" stroke="#d7dde4" stroke-width="2"/>
+<text x="800" y="760" text-anchor="middle" class="em">変わる：各位置の特徴　　変わらない：位置数（28×28 = 784本）</text>
+<text x="800" y="805" text-anchor="middle" class="small">※ 5×5のグリッドは説明用。実際の特徴マップは28×28。</text>
+</svg>

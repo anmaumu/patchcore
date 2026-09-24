@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="920" viewBox="0 0 1800 920" role="img" aria-labelledby="title desc">
+<title id="title">PatchCore：正常特徴のメモリバンクと最近傍距離</title>
+<desc id="desc">正常画像からCNNで得たパッチ特徴ベクトルをメモリバンクに保存する。検査画像も同じCNNで特徴量にし、各検査パッチから最も近い正常特徴までの距離を異常度とする。</desc>
+<defs><style>
+text{font-family:'Yu Gothic','Meiryo',sans-serif;fill:#172233}.title{font-size:39px;font-weight:700}.head{font-size:27px;font-weight:700}.body{font-size:21px}.small{font-size:18px}.em{font-size:23px;font-weight:700}.box{fill:#fff;stroke:#172233;stroke-width:2.5}.soft{fill:#f4f6f8;stroke:#172233;stroke-width:2.5}.accent{fill:#fff1e8;stroke:#ed7d31;stroke-width:2.5}.arrow{stroke:#172233;stroke-width:2.6;fill:none;marker-end:url(#a)}.thin{stroke:#172233;stroke-width:2;fill:none}.dash{stroke:#ed7d31;stroke-width:3;stroke-dasharray:7 6;fill:none}.grid{stroke:#172233;stroke-width:2;fill:none}
+</style><marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#172233"/></marker></defs>
+<rect width="1800" height="920" fill="#fff"/>
+<text x="70" y="85" class="title">正常の特徴にどれだけ近いかで、異常度を決める</text>
+<text x="70" y="128" class="body">PatchCoreの基本：正常パッチの特徴を記憶し、検査パッチと比較する</text>
+
+<text x="75" y="210" class="head">① 正常画像から記憶する</text>
+<g transform="translate(85 260)"><rect width="104" height="104" class="box"/><path d="M34.7 0 V104 M69.3 0 V104 M0 34.7 H104 M0 69.3 H104" class="grid"/></g>
+<g transform="translate(205 260)"><rect width="104" height="104" class="box"/><path d="M34.7 0 V104 M69.3 0 V104 M0 34.7 H104 M0 69.3 H104" class="grid"/></g>
+<g transform="translate(325 260)"><rect width="104" height="104" class="box"/><path d="M34.7 0 V104 M69.3 0 V104 M0 34.7 H104 M0 69.3 H104" class="grid"/></g>
+<text x="257" y="400" text-anchor="middle" class="body">正常画像だけ</text>
+<path d="M450 312 H510" class="arrow"/>
+<rect x="525" y="260" width="165" height="104" rx="8" class="soft"/>
+<text x="607" y="305" text-anchor="middle" class="head">CNN</text>
+<text x="607" y="339" text-anchor="middle" class="small">特徴抽出</text>
+<path d="M700 312 H775" class="arrow"/>
+
+<rect x="790" y="222" width="410" height="225" rx="10" class="box"/>
+<text x="995" y="260" text-anchor="middle" class="head">メモリバンク</text>
+<text x="995" y="291" text-anchor="middle" class="small">正常パッチの特徴ベクトルの集合</text>
+<path d="M830 410 H1155 M830 410 V305" stroke="#9aa5b1" stroke-width="1.5" fill="none"/>
+<g fill="#dce1e6" stroke="#172233" stroke-width="1.5">
+<circle cx="858" cy="364" r="7"/><circle cx="875" cy="385" r="7"/><circle cx="887" cy="348" r="7"/><circle cx="899" cy="373" r="7"/><circle cx="911" cy="393" r="7"/><circle cx="921" cy="356" r="7"/><circle cx="936" cy="378" r="7"/><circle cx="949" cy="341" r="7"/><circle cx="960" cy="363" r="7"/><circle cx="974" cy="387" r="7"/><circle cx="982" cy="349" r="7"/><circle cx="995" cy="370" r="7"/><circle cx="1007" cy="332" r="7"/><circle cx="1019" cy="390" r="7"/><circle cx="1030" cy="360" r="7"/><circle cx="1047" cy="340" r="7"/><circle cx="1056" cy="380" r="7"/><circle cx="1071" cy="355" r="7"/><circle cx="1090" cy="391" r="7"/><circle cx="1111" cy="365" r="7"/><circle cx="1132" cy="325" r="7"/>
+</g>
+<text x="994" y="434" text-anchor="middle" class="small">1点 ＝ 1つの正常パッチ特徴</text>
+
+<text x="75" y="505" class="head">② 検査画像を調べる</text>
+<g transform="translate(205 550)"><rect width="104" height="104" class="box"/><path d="M34.7 0 V104 M69.3 0 V104 M0 34.7 H104 M0 69.3 H104" class="grid"/><rect x="69.3" y="34.7" width="34.7" height="34.7" fill="#ed7d31" stroke="#172233" stroke-width="2"/></g>
+<text x="257" y="690" text-anchor="middle" class="body">検査画像</text>
+<path d="M325 602 H510" class="arrow"/>
+<rect x="525" y="550" width="165" height="104" rx="8" class="soft"/>
+<text x="607" y="595" text-anchor="middle" class="head">同じCNN</text>
+<text x="607" y="629" text-anchor="middle" class="small">特徴抽出</text>
+<path d="M700 602 H775" class="arrow"/>
+<rect x="790" y="552" width="225" height="100" rx="8" class="box"/>
+<circle cx="835" cy="602" r="15" fill="#ed7d31" stroke="#172233" stroke-width="2"/>
+<text x="875" y="611" class="head">パッチ特徴 q</text>
+<path d="M1025 602 H1085" class="arrow"/>
+
+<path d="M1200 335 H1250 V505" class="arrow"/>
+<rect x="1100" y="520" width="300" height="165" rx="8" class="box"/>
+<text x="1250" y="565" text-anchor="middle" class="head">最も近い正常特徴</text>
+<circle cx="1195" cy="621" r="13" fill="#ed7d31" stroke="#172233" stroke-width="2"/>
+<circle cx="1307" cy="621" r="13" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<path d="M1210 621 H1291" class="dash"/>
+<text x="1250" y="662" text-anchor="middle" class="body">最近傍距離 d</text>
+<path d="M1400 602 H1455" class="arrow"/>
+<rect x="1470" y="505" width="255" height="195" rx="8" class="accent"/>
+<text x="1597" y="558" text-anchor="middle" class="head">パッチ異常度</text>
+<text x="1597" y="613" text-anchor="middle" class="em">= 最短距離 d</text>
+<text x="1597" y="660" text-anchor="middle" class="body">遠いほど高い</text>
+
+<path d="M70 763 H1730" stroke="#d7dde4" stroke-width="2"/>
+<text x="900" y="813" text-anchor="middle" class="em">各パッチで比較し、距離を元の位置に並べると異常マップになる</text>
+<text x="900" y="862" text-anchor="middle" class="small">※ メモリバンクは正常画像そのものではなく、正常画像から抽出した特徴ベクトルの集合。</text>
+</svg>
+

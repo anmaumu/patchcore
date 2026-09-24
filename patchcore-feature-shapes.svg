@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+<title id="title">PatchCoreのパッチ特徴量ができるまで</title>
+<desc id="desc">入力画像からCNNのlayer2とlayer3を取得し、局所集約、位置合わせ、結合、次元削減を経て、1画像あたり784本の1024次元パッチ特徴を作る流れ。</desc>
+<defs><style>
+text{font-family:'Yu Gothic','Meiryo',sans-serif;fill:#172233}
+.title{font-size:38px;font-weight:700}.label{font-size:25px;font-weight:700}.body{font-size:21px}.dim{font-size:22px;font-weight:700}.small{font-size:18px}.note{font-size:21px;font-weight:700}
+.box{fill:#fff;stroke:#172233;stroke-width:2.5}.soft{fill:#f3f5f7;stroke:#172233;stroke-width:2.5}.orange{fill:#fff1e8;stroke:#ed7d31;stroke-width:2.5}.line{stroke:#172233;stroke-width:2.5;fill:none;marker-end:url(#arrow)}.thin{stroke:#172233;stroke-width:2;fill:none}
+</style><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#172233"/></marker></defs>
+<rect width="1600" height="900" fill="#fff"/>
+<text x="80" y="85" class="title">パッチ特徴量ができるまで</text>
+<text x="80" y="126" class="body">入力画像 → CNNの中間層 → 同じ位置の特徴をまとめる</text>
+
+<rect x="80" y="268" width="200" height="120" rx="8" class="box"/>
+<text x="180" y="315" text-anchor="middle" class="label">入力画像</text>
+<text x="180" y="355" text-anchor="middle" class="dim">3 × 224 × 224</text>
+<path d="M280 328 H335" class="line"/>
+<rect x="340" y="268" width="190" height="120" rx="8" class="soft"/>
+<text x="435" y="314" text-anchor="middle" class="label">CNN</text>
+<text x="435" y="354" text-anchor="middle" class="small">重みは固定</text>
+
+<path d="M530 328 H565 V242 H605" class="line"/>
+<path d="M565 328 V438 H605" class="line"/>
+<rect x="610" y="185" width="260" height="112" rx="8" class="box"/>
+<text x="740" y="228" text-anchor="middle" class="label">layer2</text>
+<text x="740" y="268" text-anchor="middle" class="dim">512 × 28 × 28</text>
+<rect x="610" y="382" width="260" height="112" rx="8" class="box"/>
+<text x="740" y="425" text-anchor="middle" class="label">layer3</text>
+<text x="740" y="465" text-anchor="middle" class="dim">1024 × 14 × 14</text>
+
+<path d="M870 241 H925" class="line"/>
+<path d="M870 438 H925" class="line"/>
+<rect x="930" y="185" width="280" height="112" rx="8" class="soft"/>
+<text x="1070" y="228" text-anchor="middle" class="label">局所集約</text>
+<text x="1070" y="266" text-anchor="middle" class="small">3×3平均・位置数は維持</text>
+<rect x="930" y="382" width="280" height="112" rx="8" class="soft"/>
+<text x="1070" y="423" text-anchor="middle" class="label">局所集約 → 位置合わせ</text>
+<text x="1070" y="463" text-anchor="middle" class="small">14×14 → 28×28</text>
+
+<path d="M1210 241 H1255 V328 H1300" class="line"/>
+<path d="M1210 438 H1255 V328" class="thin"/>
+<rect x="1305" y="268" width="230" height="120" rx="8" class="orange"/>
+<text x="1420" y="314" text-anchor="middle" class="label">同じ位置で結合</text>
+<text x="1420" y="354" text-anchor="middle" class="dim">1536 × 28 × 28</text>
+
+<path d="M1420 388 V535 H1165" class="line"/>
+<rect x="885" y="540" width="280" height="120" rx="8" class="soft"/>
+<text x="1025" y="586" text-anchor="middle" class="label">次元調整（任意）</text>
+<text x="1025" y="625" text-anchor="middle" class="dim">この例：1536 → 1024</text>
+<path d="M885 600 H820" class="line"/>
+<rect x="415" y="540" width="400" height="120" rx="8" class="orange"/>
+<text x="615" y="586" text-anchor="middle" class="label">パッチ特徴量</text>
+<text x="615" y="625" text-anchor="middle" class="dim">784本 × 1024次元（この例）</text>
+
+
+
+
+
+
+<path d="M80 745 H1520" stroke="#d7dde4" stroke-width="2"/>
+<text x="80" y="795" class="note">784本＝位置の数</text>
+<text x="675" y="795" class="note">1024次元＝1本のベクトルの長さ</text>
+<text x="80" y="844" class="small">※ 図中の形状は1画像分。実際のテンソルには先頭にバッチ数 B が付く。</text>
+</svg>
+
+

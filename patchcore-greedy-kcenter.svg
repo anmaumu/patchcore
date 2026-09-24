@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="850" viewBox="0 0 1600 850" role="img" aria-labelledby="title desc">
+<title id="title">Greedy k-center：最も遠い正常点を代表に追加する</title>
+<desc id="desc">最初に正常特徴を1点選び、選択済み代表からの最短距離が最大となる正常点を追加し、距離を更新して繰り返す3段階の図。</desc>
+<defs><style>text{font-family:'Yu Gothic','Meiryo',sans-serif;fill:#172233}.title{font-size:39px;font-weight:700}.head{font-size:26px;font-weight:700}.body{font-size:21px}.small{font-size:18px}.call{font-size:23px;font-weight:700}.panel{fill:#fff;stroke:#172233;stroke-width:2.5}.arrow{stroke:#172233;stroke-width:2.5;fill:none;marker-end:url(#a)}.distance{stroke:#ed7d31;stroke-width:2.5;stroke-dasharray:8 6;fill:none}</style><marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#172233"/></marker></defs>
+<rect width="1600" height="850" fill="#fff"/>
+<text x="70" y="90" class="title">Greedy k-center：遠い正常点を代表に加える</text>
+<text x="70" y="135" class="body">選んだ代表から最も遠い点を、目標数になるまで1点ずつ追加</text>
+<text x="280" y="215" text-anchor="middle" class="head">① 最初の1点を選ぶ</text>
+<text x="795" y="215" text-anchor="middle" class="head">② 最も遠い点を追加</text>
+<text x="1310" y="215" text-anchor="middle" class="head">③ 距離を更新して繰り返す</text>
+<rect x="60" y="250" width="440" height="340" rx="8" class="panel"/>
+<rect x="575" y="250" width="440" height="340" rx="8" class="panel"/>
+<rect x="1090" y="250" width="440" height="340" rx="8" class="panel"/>
+<path d="M510 420 H560" class="arrow"/><path d="M1025 420 H1075" class="arrow"/>
+
+<circle cx="142" cy="336" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="181" cy="320" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="221" cy="333" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="262" cy="319" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="304" cy="341" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="346" cy="332" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="133" cy="383" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="171" cy="373" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="211" cy="387" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="254" cy="370" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="297" cy="390" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="341" cy="378" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="141" cy="431" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="178" cy="419" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="218" cy="436" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="260" cy="418" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="302" cy="437" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="345" cy="425" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="144" cy="481" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="186" cy="467" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="224" cy="486" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="265" cy="472" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="307" cy="489" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="346" cy="505" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="420" cy="422" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="657" cy="336" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="696" cy="320" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="736" cy="333" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="777" cy="319" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="819" cy="341" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="861" cy="332" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="648" cy="383" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="686" cy="373" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="726" cy="387" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="769" cy="370" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="812" cy="390" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="856" cy="378" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="656" cy="431" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="693" cy="419" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="733" cy="436" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="775" cy="418" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="817" cy="437" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="860" cy="425" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="659" cy="481" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="701" cy="467" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="739" cy="486" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="780" cy="472" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="822" cy="489" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="861" cy="505" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="935" cy="422" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="1172" cy="336" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="1211" cy="320" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="1251" cy="333" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="1292" cy="319" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="1334" cy="341" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="1376" cy="332" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="1163" cy="383" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="1201" cy="373" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="1241" cy="387" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="1284" cy="370" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="1327" cy="390" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="1371" cy="378" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="1171" cy="431" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="1208" cy="419" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="1248" cy="436" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="1290" cy="418" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="1332" cy="437" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="1375" cy="425" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="1174" cy="481" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="1216" cy="467" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="1254" cy="486" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="1295" cy="472" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="1337" cy="489" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="1376" cy="505" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="1450" cy="422" r="7" fill="#dce1e6" stroke="#172233" stroke-width="2"/>
+<circle cx="218" cy="436" r="11" fill="#ed7d31" stroke="#172233" stroke-width="2"/>
+<circle cx="733" cy="436" r="11" fill="#ed7d31" stroke="#172233" stroke-width="2"/>
+<circle cx="1248" cy="436" r="11" fill="#ed7d31" stroke="#172233" stroke-width="2"/>
+<path d="M218 436 L420 422" class="distance"/>
+<circle cx="420" cy="422" r="16" fill="none" stroke="#ed7d31" stroke-width="2.5"/>
+<circle cx="935" cy="422" r="11" fill="#ed7d31" stroke="#172233" stroke-width="2"/>
+<circle cx="1450" cy="422" r="11" fill="#ed7d31" stroke="#172233" stroke-width="2"/>
+<path d="M935 422 L819 341" class="distance"/>
+<circle cx="819" cy="341" r="16" fill="none" stroke="#ed7d31" stroke-width="2.5"/>
+<circle cx="1334" cy="341" r="11" fill="#ed7d31" stroke="#172233" stroke-width="2"/>
+<text x="280" y="637" text-anchor="middle" class="body">破線：代表までの距離</text>
+<text x="795" y="637" text-anchor="middle" class="body">一番遠い正常点を選ぶ</text>
+<text x="1310" y="637" text-anchor="middle" class="body">広がりを覆う代表が増える</text>
+<path d="M60 705 H1530" stroke="#d7dde4" stroke-width="2"/>
+<text x="800" y="755" text-anchor="middle" class="call">各点の「最も近い代表までの距離」を測り、その値が最大の点を追加</text>
+<text x="800" y="803" text-anchor="middle" class="small">オレンジ：選択済みの代表　　オレンジの輪：次に選ぶ点　　点の配置は説明用</text>
+</svg>
